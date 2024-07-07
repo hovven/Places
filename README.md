@@ -4,7 +4,7 @@ Wikipedia iOS App Deep Linking Enhancement
 
 Overview
 
-This project enhances the Wikipedia iOS app to handle deep links that navigate directly to the ‘Places’ tab with specified coordinates.
+This project is a test to showcase enhancements to the Wikipedia iOS app. The enhancements will allow for handling deep links that navigate directly to the ‘Places’ tab with specified coordinates.
 
     
 #### Repositories
