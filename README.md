@@ -1,6 +1,6 @@
 # Places
 
-Wikipedia iOS App Deep Linking Enhancement
+Wikipedia iOS App Deep Linking Enhancement with utilizing Observable framework and SwiftUI
 
 Overview
 
