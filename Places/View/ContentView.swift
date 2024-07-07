@@ -3,7 +3,7 @@ import SwiftUI
 struct ContentView: View {
     
     // Dependencies
-    @Bindable var viewModel = PlacesModel()
+    @StateObject var viewModel = PlacesModel()
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
@@ -78,14 +78,22 @@ struct ContentView: View {
         .background(colorScheme == .dark ? .black : .white)
     }
     
+    @ViewBuilder
     private var noContentView: some View {
-        ContentUnavailableView(
-            LocalizedText.placeHolderText.text,
-            systemImage: "location.slash"
-        )
-        .accessibilityElement()
-        .accessibilityLabel(LocalizedText.placeHolderText.text)
-        .accessibilityHint(LocalizedText.AccessibilityHint.noContent.text)
+        if #available(iOS 17.0, *) {
+            ContentUnavailableView(
+                LocalizedText.placeHolderText.text,
+                systemImage: "location.slash"
+            )
+            .accessibilityElement()
+            .accessibilityLabel(LocalizedText.placeHolderText.text)
+            .accessibilityHint(LocalizedText.AccessibilityHint.noContent.text)
+        } else {
+            Text(LocalizedText.placeHolderText.text)
+                .accessibilityElement()
+                .accessibilityLabel(LocalizedText.placeHolderText.text)
+                .accessibilityHint(LocalizedText.AccessibilityHint.noContent.text)
+        }
     }
     
     @ViewBuilder
@@ -137,17 +145,17 @@ struct ContentView: View {
 #Preview("Light Mode") {
     ContentView()
         .environment(\.colorScheme, .light)
-        .environment(PlacesModel(apiClient: .testValue))
+        .environmentObject(PlacesModel(apiClient: .testValue))
 }
 
 #Preview("Dark Mode") {
     ContentView()
         .environment(\.colorScheme, .dark)
-        .environment(PlacesModel(apiClient: .testValue))
+        .environmentObject(PlacesModel(apiClient: .testValue))
 }
 
 #Preview("Empty Value") {
     ContentView()
         .environment(\.colorScheme, .light)
-        .environment(PlacesModel(apiClient: .emptyValue))
+        .environmentObject(PlacesModel(apiClient: .emptyValue))
 }
