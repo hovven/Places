@@ -1,20 +1,19 @@
 import Observation
 import SwiftUI
 
-@Observable
-final class PlacesModel {
+final class PlacesModel: ObservableObject {
     // MARK: - Alert
-    var alertItem: AlertItem = .init(title: .alert, message: "")
-    var loadingState: LoadingState = .isLoading
-    var shouldOpenAppStore = false
-    var shouldShowAddCustomLocation = false
-    var shouldShowInputError = false
+    @Published var alertItem: AlertItem = .init(title: .alert, message: "")
+    @Published var loadingState: LoadingState = .isLoading
+    @Published var shouldOpenAppStore = false
+    @Published var shouldShowAddCustomLocation = false
+    @Published var shouldShowInputError = false
     
     // MARK: -
     var noPlaces: Bool { places.locations.isEmpty }
-    var places: Place = .init(locations: [])
-    var customLocationLong = ""
-    var customLocationLat = ""
+    @Published var places: Place = .init(locations: [])
+    @Published var customLocationLong = ""
+    @Published var customLocationLat = ""
     
     // MARK: - Dependencies
     private let apiClient: APIClient
