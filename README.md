@@ -14,7 +14,7 @@ This project is a test to showcase enhancements to the Wikipedia iOS app. The en
 
 #### Features
 * Deep Link Handling: Opens the ‘Places’ tab with given coordinates via deep links.
-* Swift concurrency and accessibility
+* Swift concurrency (Checking Complete) and accessibility
 * Unit Tests: Includes tests for the URL validation helper.
 * iOS Version Support: Supports the latest iOS version, with a [**Pull Request**](https://github.com/hovven/Places/pull/1) for iOS 16 compatibility.
 
