@@ -86,8 +86,8 @@ final class PlacesModel {
         }
         
         guard
-            let lat = Double(customLocationLat), /* validator.isLatitudeValid(lat), */
-            let long = Double(customLocationLong)/*,  validator.isLongitudeValid(long) */
+            let lat = Double(customLocationLat), validator.isLatitudeValid(lat),
+            let long = Double(customLocationLong),  validator.isLongitudeValid(long)
         else {
             alertItem = .init(title: .alert, message: PlaceError.Input.invalidRange(customLocationLat, customLocationLong).description)
             shouldShowInputError = true
