@@ -70,32 +70,7 @@ struct ContentView: View {
             LocalizedText.addCustomLocationTitle.text,
             isPresented: $viewModel.shouldShowAddCustomLocation
         ) {
-            TextField(
-                LocalizedText.latitudeText.text,
-                text: $viewModel.customLocationLat
-            )
-            .keyboardType(.numbersAndPunctuation)
-            .accessibilityLabel(LocalizedText.latitudeText.text)
-            .accessibilityHint(LocalizedText.AccessibilityHint.enterCustomLocationLat.text)
-            
-            TextField(
-                LocalizedText.longitudeText.text,
-                text: $viewModel.customLocationLong
-            )
-            .keyboardType(.numbersAndPunctuation)
-            .accessibilityLabel(LocalizedText.latitudeText.text)
-            .accessibilityHint(LocalizedText.AccessibilityHint.enterCustomLocationLong.text)
-            
-            Button(LocalizedText.submitButtonText.text) {
-                Task {
-                    await viewModel.didUserEnterCustomLocation()
-                }
-            }
-            .fontWeight(.bold)
-            .accessibilityLabel(LocalizedText.submitButtonText.text)
-            .accessibilityHint(LocalizedText.submitButtonText.text)
-            
-            Button(LocalizedText.cancelButtonText.text) { }
+            addCustomLocationAlertView
         } message: {
             Text(LocalizedText.enterLocationPromptText.text)
         }
@@ -125,6 +100,37 @@ struct ContentView: View {
             EmptyView()
                 .accessibilityHint(LocalizedText.AccessibilityHint.loadingHint.text)
         }
+    }
+    
+    @ViewBuilder
+    @MainActor
+    private var addCustomLocationAlertView: some View {
+        TextField(
+            LocalizedText.latitudeText.text,
+            text: $viewModel.customLocationLat
+        )
+        .keyboardType(.numbersAndPunctuation)
+        .accessibilityLabel(LocalizedText.latitudeText.text)
+        .accessibilityHint(LocalizedText.AccessibilityHint.enterCustomLocationLat.text)
+        
+        TextField(
+            LocalizedText.longitudeText.text,
+            text: $viewModel.customLocationLong
+        )
+        .keyboardType(.numbersAndPunctuation)
+        .accessibilityLabel(LocalizedText.latitudeText.text)
+        .accessibilityHint(LocalizedText.AccessibilityHint.enterCustomLocationLong.text)
+        
+        Button(LocalizedText.submitButtonText.text) {
+            Task {
+                await viewModel.didUserEnterCustomLocation()
+            }
+        }
+        .fontWeight(.bold)
+        .accessibilityLabel(LocalizedText.submitButtonText.text)
+        .accessibilityHint(LocalizedText.submitButtonText.text)
+        
+        Button(LocalizedText.cancelButtonText.text) { }
     }
 }
 
