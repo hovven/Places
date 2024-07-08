@@ -19,13 +19,16 @@ final class PlacesModel {
     // MARK: - Dependencies
     private let apiClient: APIClient
     private let validator: Validator
+    private let urlHandler: URLHandler
     
     init(
         apiClient: APIClient = .liveValue,
-        validator: Validator = .liveValue
+        validator: Validator = .liveValue,
+        urlHandler: URLHandler = .liveValue
     ) {
         self.apiClient = apiClient
         self.validator = validator
+        self.urlHandler = urlHandler
     }
     
     @MainActor
@@ -46,7 +49,7 @@ final class PlacesModel {
     
     @MainActor
     func didPressLocation(_ location: Location) async {
-        let urlString = Validator.defaultWikipediaPlacesURL + "?lat=\(location.lat)&lon=\(location.long)"
+        let urlString = URLFactory.makeLocationURL(with: location)
         
         guard let url = URL(string: urlString) else {
             alertItem = .init(title: .alert, message: PlaceError.URL.invalidDeepLinkURL(urlString).description)
@@ -54,7 +57,7 @@ final class PlacesModel {
         }
         
         if await validator.canOpenURL(url) {
-            let result = await validator.open(url)
+            let result = await urlHandler.open(url)
             if !result {
                 alertItem = .init(title: .error, message: PlaceError.URL.openURLFailed.description)
             }
@@ -66,12 +69,12 @@ final class PlacesModel {
     
     @MainActor
     func openAppStore() async {
-        guard let appStoreURL = URL(string: Validator.appStoreWikipediaURL) else {
-            alertItem = .init(title: .error, message: PlaceError.URL.invalidAppStoreURL(Validator.appStoreWikipediaURL).description)
+        guard let appStoreURL = URL(string: URLFactory.appStoreWikipediaURL) else {
+            alertItem = .init(title: .error, message: PlaceError.URL.invalidAppStoreURL(URLFactory.appStoreWikipediaURL).description)
             return
         }
         
-        let result = await validator.open(appStoreURL)
+        let result = await urlHandler.open(appStoreURL)
         if !result {
             alertItem = .init(title: .error, message: PlaceError.URL.openURLFailed.description)
         }

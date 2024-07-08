@@ -4,7 +4,7 @@ import XCTest
 final class PlacesTests: XCTestCase {
     
     func testFetchLocationsSuccess() async {
-        let model = PlacesModel(apiClient: .testValue, validator: .testValue)
+        let model = PlacesModel(apiClient: .testValue, validator: .testValue, urlHandler: .testValue)
         
         await model.fetchLocations()
         
@@ -15,7 +15,7 @@ final class PlacesTests: XCTestCase {
     
     func testFetchLocationsFailure() async {
         let apiClient = APIClient { throw PlaceError.Network.badURLError("bad_url") }
-        let model = PlacesModel(apiClient: apiClient, validator: .testValue)
+        let model = PlacesModel(apiClient: apiClient, validator: .testValue, urlHandler: .testValue)
         
         await model.fetchLocations()
         
@@ -25,7 +25,7 @@ final class PlacesTests: XCTestCase {
     }
     
     func testDidPressLocationWithValidURL() async {
-        let model = PlacesModel(apiClient: .emptyValue, validator: .testValue)
+        let model = PlacesModel(apiClient: .emptyValue, validator: .testValue, urlHandler: .testValue)
         
         let location = Location(name: "Test", lat: 0, long: 0)
         await model.didPressLocation(location)
@@ -36,11 +36,10 @@ final class PlacesTests: XCTestCase {
     
     func testDidPressLocationWithInvalidURL() async {
         let validator = Validator { _ in false }
-        open: { _ in true }
         isLatitudeValid: { _ in true }
         isLongitudeValid: { _ in true }
         
-        let model = PlacesModel(apiClient: .emptyValue, validator: validator)
+        let model = PlacesModel(apiClient: .emptyValue, validator: validator, urlHandler: .testValue)
         
         let location = Location(name: "Test", lat: 0, long: 0)
         await model.didPressLocation(location)
@@ -53,12 +52,9 @@ final class PlacesTests: XCTestCase {
     }
     
     func testDidPressLocationOpenURLFailed() async {
-        let validator = Validator { _ in true }
-        open: { _ in false }
-        isLatitudeValid: { _ in true }
-        isLongitudeValid: { _ in true }
+        let urlHandler = URLHandler { _ in false }
         
-        let model = PlacesModel(apiClient: .emptyValue, validator: validator)
+        let model = PlacesModel(apiClient: .emptyValue, validator: .testValue, urlHandler: urlHandler)
         
         let location = Location(name: "Test", lat: 0, long: 0)
         await model.didPressLocation(location)
@@ -71,7 +67,7 @@ final class PlacesTests: XCTestCase {
     }
     
     func testOpenAppStoreSuccess() async {
-        let model = PlacesModel(apiClient: .emptyValue, validator: .testValue)
+        let model = PlacesModel(apiClient: .emptyValue, validator: .testValue, urlHandler: .testValue)
         
         await model.openAppStore()
         
@@ -80,12 +76,9 @@ final class PlacesTests: XCTestCase {
     
     func testOpenAppStoreFailure() async {
         let apiClient = APIClient.emptyValue
-        let validator = Validator { _ in true }
-        open: { _ in false }
-        isLatitudeValid: { _ in true }
-        isLongitudeValid: { _ in true }
+        let urlHandler = URLHandler { _ in false }
         
-        let model = PlacesModel(apiClient: apiClient, validator: validator)
+        let model = PlacesModel(apiClient: .emptyValue, validator: .testValue, urlHandler: urlHandler)
         
         await model.openAppStore()
         
@@ -102,7 +95,7 @@ final class PlacesTests: XCTestCase {
     }
     
     func testDidUserEnterCustomLocationValid() async {
-        let model = PlacesModel(apiClient: .emptyValue, validator: .testValue)
+        let model = PlacesModel(apiClient: .emptyValue, validator: .testValue, urlHandler: .testValue)
         
         model.customLocationLat = "0"
         model.customLocationLong = "0"
@@ -116,11 +109,10 @@ final class PlacesTests: XCTestCase {
     func testDidUserEnterCustomLocationInvalid() async {
         let apiClient = APIClient.emptyValue
         let validator = Validator { _ in true }
-        open: { _ in true }
         isLatitudeValid: { _ in false }
         isLongitudeValid: { _ in false }
         
-        let model = PlacesModel(apiClient: apiClient, validator: validator)
+        let model = PlacesModel(apiClient: apiClient, validator: validator, urlHandler: .testValue)
         
         model.customLocationLat = "invalid"
         model.customLocationLong = "invalid"

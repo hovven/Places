@@ -23,6 +23,8 @@
 		DC61518D2C395CA100C92901 /* PlaceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC61518C2C395CA100C92901 /* PlaceRow.swift */; };
 		DC6151912C39867A00C92901 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6151902C39867A00C92901 /* Alert.swift */; };
 		DC6151932C39869900C92901 /* LocalizedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6151922C39869900C92901 /* LocalizedText.swift */; };
+		DC7B556B2C3BE6D200C689E4 /* URLFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7B556A2C3BE6D200C689E4 /* URLFactory.swift */; };
+		DC7B556D2C3BEC3F00C689E4 /* URLHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7B556C2C3BEC3F00C689E4 /* URLHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +66,8 @@
 		DC61518C2C395CA100C92901 /* PlaceRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceRow.swift; sourceTree = "<group>"; };
 		DC6151902C39867A00C92901 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		DC6151922C39869900C92901 /* LocalizedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedText.swift; sourceTree = "<group>"; };
+		DC7B556A2C3BE6D200C689E4 /* URLFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLFactory.swift; sourceTree = "<group>"; };
+		DC7B556C2C3BEC3F00C689E4 /* URLHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +190,8 @@
 			children = (
 				DC6151882C38903300C92901 /* Validator.swift */,
 				DC6151832C3853AD00C92901 /* Data+Decode.swift */,
+				DC7B556A2C3BE6D200C689E4 /* URLFactory.swift */,
+				DC7B556C2C3BEC3F00C689E4 /* URLHandler.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -322,9 +328,11 @@
 			files = (
 				DC6151512C383F4400C92901 /* ContentView.swift in Sources */,
 				DC6151892C38903300C92901 /* Validator.swift in Sources */,
+				DC7B556B2C3BE6D200C689E4 /* URLFactory.swift in Sources */,
 				DC6151842C3853AD00C92901 /* Data+Decode.swift in Sources */,
 				DC61514F2C383F4400C92901 /* PlacesApp.swift in Sources */,
 				DC61517C2C38406F00C92901 /* PlacesModel.swift in Sources */,
+				DC7B556D2C3BEC3F00C689E4 /* URLHandler.swift in Sources */,
 				DC6151862C3853F700C92901 /* PriceError.swift in Sources */,
 				DC61517E2C38438D00C92901 /* APIClient.swift in Sources */,
 				DC6151932C39869900C92901 /* LocalizedText.swift in Sources */,
