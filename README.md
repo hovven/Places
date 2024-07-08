@@ -2,11 +2,15 @@
 
 Wikipedia iOS App Deep Linking Enhancement with utilizing Observable framework and SwiftUI
 
-Overview
+#### Overview
 
 This project is a test to showcase enhancements to the Wikipedia iOS app. The enhancements will allow for handling deep links that navigate directly to the ‘Places’ tab with specified coordinates.
+Utilized the **MV pattern** with the foucus on separation of concerns, and **clean architecture** concepts.
 
-    
+* Domain layer: Entities: Place, Location, ...
+* Data Layer: APIClient Repository
+* Presentation Layer: PlacesModel + PlacesView
+
 #### Repositories
 
 * Wikipedia iOS App: [forked-wikipedia-ios](https://github.com/hovven/wikipedia-ios)
